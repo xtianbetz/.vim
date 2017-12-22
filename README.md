@@ -1,13 +1,17 @@
 .vim
 ====
 
-My vim dot files. the `.vimrc` file is saved to [vimrc](https://github.com/jessfraz/.vim/blob/master/vimrc).
+My vim dot files. the `.vimrc` file is saved to [vimrc](https://github.com/xtianbetz/.vim/blob/master/vimrc).
+
+This repo was forked from jessfraz' [vimrc](https://github.com/jessfraz/.vim/blob/master/vimrc).
+
+I have made only small tweaks for my own needs; All the credit goes to Jessie Frazelle.
 
 Just run the following commands via terminal to get perfectly set up:
 
 ```console
 $ cd ~/
-$ git clone --recursive https://github.com/jessfraz/.vim.git .vim
+$ git clone --recursive https://github.com/xtianbetz/.vim.git .vim
 $ ln -sf $HOME/.vim/vimrc $HOME/.vimrc
 $ cd $HOME/.vim
 $ git submodule update --init
@@ -22,7 +26,6 @@ Currently using version 2.2 of Pathogen
 
 * [Dockerfile](https://github.com/docker/docker/tree/master/contrib/syntax/vim)
 * [github.com/ctrlpvim/ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim.git)
-* [github.com/Raimondi/delimitMate](https://github.com/Raimondi/delimitMate.git)
 * [github.com/zchee/deoplete-go](https://github.com/zchee/deoplete-go.git)
 * [github.com/Shougo/deoplete.nvim](https://github.com/Shougo/deoplete.nvim.git)
 * [github.com/vivien/vim-linux-coding-style](https://github.com/vivien/vim-linux-coding-style.git)

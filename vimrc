@@ -195,7 +195,7 @@ autocmd FileType qf wincmd J
 
 " Dont show me any output when I build something
 " Because I am using quickfix for errors
-"nmap <leader>m :make<CR><enter>
+nmap <leader>m :make<CR><CR>
 
 " Some useful quickfix shortcuts
 ":cc      see the current error
@@ -474,13 +474,6 @@ augroup go
   autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 augroup END
 
-" ==================== delimitMate ====================
-let g:delimitMate_expand_cr = 1
-let g:delimitMate_expand_space = 1
-let g:delimitMate_smart_quotes = 1
-let g:delimitMate_expand_inside_quotes = 0
-let g:delimitMate_smart_matchpairs = '^\%(\w\|\$\)'
-
 "==================== NerdTree ====================
 " For toggling
 nmap <C-n> :NERDTreeToggle<CR>
@@ -554,6 +547,42 @@ let g:airline_theme='solarized'
 let g:remoteSession = ($STY == "")
 if !g:remoteSession
   let g:airline_powerline_fonts=1
+endif
+
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+
+" @xtianbetz needed these for powerline fonts on clear linux/gnome terminal
+" unicode symbols
+let g:airline_left_sep = '»'
+let g:airline_left_sep = '▶'
+let g:airline_right_sep = '«'
+let g:airline_right_sep = '◀'
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
+let g:airline_symbols.whitespace = 'Ξ'
+
+" airline symbols
+let g:airline_left_sep = ''
+let g:airline_left_alt_sep = ''
+let g:airline_right_sep = ''
+let g:airline_right_alt_sep = ''
+let g:airline_symbols.branch = ''
+let g:airline_symbols.readonly = ''
+let g:airline_symbols.linenr = ''
+
+" Enable lint syntax checking of php files any time a PHP file is saved
+if has("autocmd")
+	autocmd BufWritePost    *.php   make
+	au FileType php
+		\ set makeprg=php\ -l\ % |
+		\ set errorformat=%m\ in\ %f\ on\ line\ %l
 endif
 
 " vim:ts=2:sw=2:et
