@@ -76,7 +76,6 @@ set smarttab
 set et
 set tabstop=4
 set shiftwidth=4
-set expandtab
 
 set nrformats-=octal
 set shiftround
@@ -317,11 +316,11 @@ endif
 au BufNewFile,BufRead *.vim setlocal noet ts=4 sw=4 sts=4
 au BufNewFile,BufRead *.txt setlocal noet ts=4 sw=4
 au BufNewFile,BufRead *.md setlocal spell noet ts=4 sw=4
-au BufNewFile,BufRead *.yml,*.yaml setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.cpp setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.hpp setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.json setlocal expandtab ts=2 sw=2
-au BufNewFile,BufRead *.jade setlocal expandtab ts=2 sw=2
+au BufNewFile,BufRead *.yml,*.yaml setlocal ts=2 sw=2
+au BufNewFile,BufRead *.cpp setlocal ts=2 sw=2
+au BufNewFile,BufRead *.hpp setlocal ts=2 sw=2
+au BufNewFile,BufRead *.json setlocal ts=2 sw=2
+au BufNewFile,BufRead *.jade setlocal ts=2 sw=2
 
 augroup filetypedetect
   au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
@@ -336,23 +335,16 @@ au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 " autocmd BufEnter *.go colorscheme nofrils-dark
 
 " scala settings
-autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2 expandtab
+autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2
 
 " Markdown Settings
-autocmd BufNewFile,BufReadPost *.md setl ts=4 sw=4 sts=4 expandtab
+autocmd BufNewFile,BufReadPost *.md setl ts=4 sw=4 sts=4
 
 " lua settings
 autocmd BufNewFile,BufRead *.lua setlocal noet ts=4 sw=4 sts=4
 
-" Dockerfile settings
-autocmd FileType dockerfile set noexpandtab
-
-" shell/config/systemd settings
-autocmd FileType fstab,systemd set noexpandtab
-autocmd FileType gitconfig,sh,toml set noexpandtab
-
 " python indent
-autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
+autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80
 
 " toml settings
 au BufRead,BufNewFile MAINTAINERS set ft=toml
