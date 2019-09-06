@@ -2,7 +2,6 @@
 execute pathogen#infect()
 call pathogen#helptags()
 
-set nocompatible              " be iMproved, required
 filetype off                  " required
 
 filetype plugin indent on    " required
@@ -178,8 +177,10 @@ set guioptions-=L
 " This comes first, because we have mappings that depend on leader
 " With a map leader it's possible to do extra key combinations
 " i.e: <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+let mapleader = ','
+let g:mapleader = ','
+
+set cmdheight=2
 
 " This trigger takes advantage of the fact that the quickfix window can be
 " easily distinguished by its file-type, qf. The wincmd J command is
@@ -191,14 +192,10 @@ autocmd FileType qf wincmd J
 " Because I am using quickfix for errors
 nmap <leader>m :make<CR><CR>
 
-" Some useful quickfix shortcuts
-":cc      see the current error
-":cn      next error
-":cp      previous error
-":clist   list all errors
-map <C-n> :cn<CR>
-map <C-m> :cp<CR>
+" quickfix go to next error shortcuts
+map <Leader>l <Plug>(qf_qf_next)
 
+" Quit easily and quickly
 nnoremap <silent> <leader>q :Sayonara<CR>
 
 " Replace the current buffer with the given new file. That means a new file
@@ -480,17 +477,17 @@ let g:vim_json_syntax_conceal = 0
 " ==================== Completion =========================
 " use deoplete for Neovim.
 if has('nvim')
-  let g:deoplete#enable_at_startup = 1
+  " i cannot get deoplete working with coc.nvim so it is turned off for now
+  let g:deoplete#enable_at_startup = 0
   let g:deoplete#ignore_sources = {}
   let g:deoplete#ignore_sources._ = ['buffer', 'member', 'tag', 'file', 'neosnippet']
   let g:deoplete#sources#go#sort_class = ['func', 'type', 'var', 'const']
   let g:deoplete#sources#go#align_class = 1
 
-
   " Use partial fuzzy matches like YouCompleteMe
-  call deoplete#custom#set('_', 'matchers', ['matcher_fuzzy'])
-  call deoplete#custom#set('_', 'converters', ['converter_remove_paren'])
-  call deoplete#custom#set('_', 'disabled_syntaxes', ['Comment', 'String'])
+  call deoplete#custom#source('_', 'matchers', ['matcher_fuzzy'])
+  call deoplete#custom#source('_', 'converters', ['converter_remove_paren'])
+  call deoplete#custom#source('_', 'disabled_syntaxes', ['Comment', 'String'])
 endif
 
 " ==================== vim-multiple-cursors ====================
@@ -565,11 +562,17 @@ let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
 " Enable lint syntax checking of php files any time a PHP file is saved
-if has("autocmd")
+if has('autocmd')
+  " make quickfix window show up automatically right after compiling
+  autocmd QuickFixCmdPost [^l]* nested cwindow
+  autocmd QuickFixCmdPost    l* nested lwindow
 	autocmd BufWritePost    *.php   make
 	au FileType php
 		\ set makeprg=php\ -l\ % |
 		\ set errorformat=%m\ in\ %f\ on\ line\ %l
 endif
+
+" Make sure gutter is constant width even with syntax/type errors
+set signcolumn=yes
 
 " vim:ts=2:sw=2:et

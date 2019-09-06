@@ -3,7 +3,7 @@
 
 My vim dot files. the `.vimrc` file is saved to [vimrc](https://github.com/xtianbetz/.vim/blob/master/vimrc).
 
-This repo was forked from jessfraz' [vimrc](https://github.com/jessfraz/.vim/blob/master/vimrc).
+This repo was forked from jessfraz's [vimrc](https://github.com/jessfraz/.vim/blob/master/vimrc).
 
 I have made only small tweaks for my own needs; All the credit goes to Jessie Frazelle.
 
