@@ -75,6 +75,7 @@ set smarttab
 set et
 set tabstop=4
 set shiftwidth=4
+set expandtab
 
 set nrformats-=octal
 set shiftround
@@ -180,7 +181,11 @@ set guioptions-=L
 let mapleader = ','
 let g:mapleader = ','
 
-set cmdheight=2
+" TODO: For some reason i get visual artifacts on CentOS 7.x using cmdheight
+" with nvim. Disable it for now.
+if !has('nvim')
+  set cmdheight=2
+endif
 
 " This trigger takes advantage of the fact that the quickfix window can be
 " easily distinguished by its file-type, qf. The wincmd J command is
@@ -313,11 +318,11 @@ endif
 au BufNewFile,BufRead *.vim setlocal noet ts=4 sw=4 sts=4
 au BufNewFile,BufRead *.txt setlocal noet ts=4 sw=4
 au BufNewFile,BufRead *.md setlocal spell noet ts=4 sw=4
-au BufNewFile,BufRead *.yml,*.yaml setlocal ts=2 sw=2
-au BufNewFile,BufRead *.cpp setlocal ts=2 sw=2
-au BufNewFile,BufRead *.hpp setlocal ts=2 sw=2
-au BufNewFile,BufRead *.json setlocal ts=2 sw=2
-au BufNewFile,BufRead *.jade setlocal ts=2 sw=2
+au BufNewFile,BufRead *.yml,*.yaml setlocal expandtab ts=2 sw=2
+au BufNewFile,BufRead *.cpp setlocal expandtab ts=2 sw=2
+au BufNewFile,BufRead *.hpp setlocal expandtab ts=2 sw=2
+au BufNewFile,BufRead *.json setlocal expandtab ts=2 sw=2
+au BufNewFile,BufRead *.jade setlocal expandtab ts=2 sw=2
 
 augroup filetypedetect
   au BufNewFile,BufRead .tmux.conf*,tmux.conf* setf tmux
@@ -332,16 +337,23 @@ au BufNewFile,BufRead *.go setlocal noet ts=4 sw=4 sts=4
 " autocmd BufEnter *.go colorscheme nofrils-dark
 
 " scala settings
-autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2
+autocmd BufNewFile,BufReadPost *.scala setl shiftwidth=2 expandtab
 
 " Markdown Settings
-autocmd BufNewFile,BufReadPost *.md setl ts=4 sw=4 sts=4
+autocmd BufNewFile,BufReadPost *.md setl ts=4 sw=4 sts=4 expandtab
 
 " lua settings
 autocmd BufNewFile,BufRead *.lua setlocal noet ts=4 sw=4 sts=4
 
+" Dockerfile settings
+autocmd FileType dockerfile set noexpandtab
+
+" shell/config/systemd settings
+autocmd FileType fstab,systemd set noexpandtab
+autocmd FileType gitconfig,sh,toml set noexpandtab
+
 " python indent
-autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80
+autocmd BufNewFile,BufRead *.py setlocal tabstop=4 softtabstop=4 shiftwidth=4 textwidth=80 smarttab expandtab
 
 " toml settings
 au BufRead,BufNewFile MAINTAINERS set ft=toml
@@ -570,6 +582,7 @@ if has('autocmd')
 	au FileType php
 		\ set makeprg=php\ -l\ % |
 		\ set errorformat=%m\ in\ %f\ on\ line\ %l
+	au FileType csproj    setf xml
 endif
 
 " Make sure gutter is constant width even with syntax/type errors
