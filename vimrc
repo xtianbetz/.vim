@@ -588,4 +588,7 @@ endif
 " Make sure gutter is constant width even with syntax/type errors
 set signcolumn=yes
 
+" We only want to enable linux-style plugin when actually editing linux code
+let g:linuxsty_patterns = [ "/usr/src/", "/linux" ]
+
 " vim:ts=2:sw=2:et
