@@ -583,7 +583,12 @@ if has('autocmd')
 		\ set makeprg=php\ -l\ % |
 		\ set errorformat=%m\ in\ %f\ on\ line\ %l
 	au FileType csproj    setf xml
+	au FileType cs
+   \ set makeprg=dotnet\ build\ -c\ Debug\ -r\ linux-arm |
+   \ set errorformat=\ %#%f(%l\\\,%c):\ %m
 endif
+"		\ set errorformat=%f(%n,%c):%m
+ "  \ set makeprg=dotnet\ publish\ -c\ Debug\ -r\ linux-arm |
 
 " Make sure gutter is constant width even with syntax/type errors
 set signcolumn=yes
